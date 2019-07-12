@@ -1,0 +1,33 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+
+  padding: 24px 32px;
+  border: 1px solid #e2e2e2;
+  border-radius: 16px;
+  box-shadow: 0px 2px 24px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tab-list {
+  display: flex;
+
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.tab {
+  border: none;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 16px;
+  background-color: #555;
+  color: white;
+  border-radius: 8px;
+  margin-right: 24px;
+}
+
+.tab:disabled {
+  background-color: #999;
+  cursor: default;
+}
