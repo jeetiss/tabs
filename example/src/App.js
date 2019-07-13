@@ -1,40 +1,49 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import './App.css'
 import './tabs.css'
 import { Tabs, useTabState, Panel } from 'restart-tabs'
+import { useInterval } from '@restart/hooks'
 
-const TabButton = ({ children }) => {
+const Tab = ({ children }) => {
   const { isActive, onClick } = useTabState()
 
   return (
-    <button disabled={isActive ? true : null} className='tab' onClick={onClick}>
+    <button className='tab' onClick={onClick} disabled={isActive ? true : null}>
       {children}
     </button>
   )
 }
 
 export default () => {
+  const tabsRef = useRef()
+  const [index, setIndex] = useState(0)
+  const [paused, stop] = useState(false)
+
+  useInterval(() => setIndex(index => (index + 1) % 3), 1000, paused)
+
   return (
-    <Tabs>
-      <div className='tabs'>
+    <div className='tabs' ref={tabsRef}>
+      <Tabs state={[index, setIndex]}>
         <div className='tab-list'>
-          <TabButton>tab 1</TabButton>
+          <Tab>tab 1</Tab>
 
-          <TabButton>tab 2</TabButton>
+          <Tab>tab 2</Tab>
 
-          <TabButton>tab 3</TabButton>
+          <Tab>tab 3</Tab>
         </div>
 
         <Panel>
-          <h1>Hello World from React! 📦 🚀</h1>
+          <h1>Hello World from React 📦 🚀</h1>
         </Panel>
+
         <Panel>
-          <h1>gcjcfxhfchxvhbmc</h1>
+          <h1>Tabs with hooks 🎣</h1>
         </Panel>
+
         <Panel>
-          <h1>rere</h1>
+          <h1>So nice 🚨</h1>
         </Panel>
-      </div>
-    </Tabs>
+      </Tabs>
+    </div>
   )
 }
