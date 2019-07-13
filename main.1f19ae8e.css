@@ -1,3 +1,20 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .tabs {
   display: flex;
   flex-direction: column;
@@ -32,3 +49,6 @@
   background-color: #555;
   cursor: default;
 }
+
+
+/*# sourceMappingURL=/main.1f19ae8e.css.map */
