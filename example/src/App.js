@@ -1,28 +1,28 @@
 import React from 'react'
 import './App.css'
 import './tabs.css'
-import { Tabs, Tab, Panel } from 'react-tabs'
+import { Tabs, useTabState, Panel } from 'restart-tabs'
 
-const TabButton = ({ isActive, onClick, children }) => (
-  <button disabled={isActive ? true : null} className='tab' onClick={onClick}>
-    {children}
-  </button>
-)
+const TabButton = ({ children }) => {
+  const { isActive, onClick } = useTabState()
+
+  return (
+    <button disabled={isActive ? true : null} className='tab' onClick={onClick}>
+      {children}
+    </button>
+  )
+}
 
 export default () => {
   return (
     <Tabs>
       <div className='tabs'>
         <div className='tab-list'>
-          <Tab>
-            <TabButton>tab 1</TabButton>
-          </Tab>
-          <Tab>
-            <TabButton>tab 2</TabButton>
-          </Tab>
-          <Tab>
-            <TabButton>tab 3</TabButton>
-          </Tab>
+          <TabButton>tab 1</TabButton>
+
+          <TabButton>tab 2</TabButton>
+
+          <TabButton>tab 3</TabButton>
         </div>
 
         <Panel>

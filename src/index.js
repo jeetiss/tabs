@@ -3,43 +3,35 @@ import React, {
   useState,
   useMemo,
   useContext,
-  useRef,
   cloneElement,
   isValidElement
 } from 'react'
 
-const useConstant = fn => {
-  const ref = useRef()
-
-  if (!ref.current) {
-    ref.current = { v: fn() }
-  }
-
-  return ref.current.v
-}
+import useConstant from 'use-constant'
 
 const TabsState = createContext()
-const Registered = createContext()
+const Elements = createContext()
 
 export const Tabs = ({ state: outerState, children }) => {
   const innerState = useState(0)
-  const elements = useConstant(() => ({ tabs: new Set(), panels: new Set() }))
+  const elements = useConstant(() => ({ tabs: 0, panels: 0 }))
   const state = outerState || innerState
 
   return (
-    <Registered.Provider value={elements}>
+    <Elements.Provider value={elements}>
       <TabsState.Provider value={state}>{children}</TabsState.Provider>
-    </Registered.Provider>
+    </Elements.Provider>
   )
 }
 
-export const Tab = ({ children }) => {
+export const useTabState = () => {
   const [activeIndex, setActive] = useContext(TabsState)
-  const { tabs } = useContext(Registered)
+  const elements = useContext(Elements)
 
   const tabIndex = useConstant(() => {
-    const currentIndex = tabs.size
-    tabs.add(currentIndex)
+    const currentIndex = elements.tabs
+    elements.tabs += 1
+
     return currentIndex
   })
 
@@ -53,6 +45,26 @@ export const Tab = ({ children }) => {
     [activeIndex, onClick, tabIndex]
   )
 
+  return state
+}
+
+export const usePanelState = () => {
+  const [activeIndex] = useContext(TabsState)
+  const elements = useContext(Elements)
+
+  const panelIndex = useConstant(() => {
+    const currentIndex = elements.panels
+    elements.panels += 1
+
+    return currentIndex
+  })
+
+  return panelIndex === activeIndex
+}
+
+export const Tab = ({ children }) => {
+  const state = useTabState()
+
   if (typeof children === 'function') {
     return children(state)
   }
@@ -61,15 +73,7 @@ export const Tab = ({ children }) => {
 }
 
 export const Panel = ({ children }) => {
-  const [activeIndex] = useContext(TabsState)
-  const { panels } = useContext(Registered)
+  const isActive = usePanelState()
 
-  const panelIndex = useConstant(() => {
-    const currentIndex = panels.size
-    panels.add(currentIndex)
-
-    return currentIndex
-  })
-
-  return panelIndex === activeIndex ? children : null
+  return isActive ? children : null
 }
