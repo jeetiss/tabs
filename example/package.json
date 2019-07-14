@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel src/index.html --open",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "predeploy": "parcel build src/index.html --public-url /restart-tabs",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@restart/hooks": "^0.3.7",
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
+    "gh-pages": "^2.0.1",
     "parcel-bundler": "^1.12.3"
   }
 }
