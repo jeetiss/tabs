@@ -26692,6 +26692,21 @@ var Tab = function Tab(_ref) {
   }, children);
 };
 
+var useHover = function useHover(ref, onHoverStart, onHoverEnd) {
+  var start = (0, _hooks.useEventCallback)(onHoverStart);
+  var end = (0, _hooks.useEventCallback)(onHoverEnd);
+  (0, _react.useEffect)(function () {
+    var element = ref.current;
+    if (!element) return;
+    element.addEventListener('mouseenter', start);
+    element.addEventListener('mouseleave', end);
+    return function () {
+      element.removeEventListener('mouseenter', start);
+      element.removeEventListener('mouseleave', end);
+    };
+  }, [end, ref, start]);
+};
+
 var _default = function _default() {
   var tabsRef = (0, _react.useRef)();
 
@@ -26705,6 +26720,11 @@ var _default = function _default() {
       paused = _useState4[0],
       stop = _useState4[1];
 
+  useHover(tabsRef, function () {
+    return stop(true);
+  }, function () {
+    return stop(false);
+  });
   (0, _hooks.useInterval)(function () {
     return setIndex(function (index) {
       return (index + 1) % 3;
@@ -26761,7 +26781,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60044" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65036" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
