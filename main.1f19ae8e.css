@@ -33,6 +33,14 @@ body {
   border-bottom: 1px solid #e2e2e2;
 }
 
+.tab-progress {
+  width: 100%;
+  height: 3px;
+
+  background-color: #e2e2e2;
+  transform-origin: 0%;
+}
+
 .tab {
   cursor: pointer;
   border: none;
