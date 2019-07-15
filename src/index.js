@@ -72,8 +72,8 @@ export const Tab = ({ children }) => {
   return isValidElement(children) ? cloneElement(children, state) : children
 }
 
-export const Panel = ({ children }) => {
+export const Panel = ({ active, children }) => {
   const isActive = usePanelState()
 
-  return isActive ? children : null
+  return (isActive || active) ? children : null
 }
