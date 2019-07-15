@@ -25933,10 +25933,11 @@ const Tab = ({
 exports.Tab = Tab;
 
 const Panel = ({
+  active,
   children
 }) => {
   const isActive = usePanelState();
-  return isActive ? children : null;
+  return isActive || active ? children : null;
 };
 
 exports.Panel = Panel;
@@ -36231,7 +36232,7 @@ var useHover = function useHover(ref, onHoverStart, onHoverEnd) {
 };
 
 exports.useHover = useHover;
-},{"react":"../node_modules/react/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js"}],"autoplayed-tabs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36240,10 +36241,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
-
-require("./App.css");
-
-require("./tabs.css");
 
 var _restartTabs = require("restart-tabs");
 
@@ -36263,6 +36260,14 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+var cn = function cn() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.filter(Boolean).join(' ');
+};
+
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
@@ -36271,9 +36276,8 @@ var Tab = function Tab(_ref) {
       onClick = _useTabState.onClick;
 
   return _react.default.createElement("button", {
-    className: "tab",
-    onClick: onClick,
-    disabled: isActive ? true : null
+    className: cn('tab', isActive && 'active'),
+    onClick: onClick
   }, children);
 };
 
@@ -36310,14 +36314,14 @@ var _default = function _default() {
       return (index + 1) % 3;
     });
   }, duration * 1000, paused);
-  return _react.default.createElement("div", {
-    className: "tabs",
-    ref: tabsRef
-  }, _react.default.createElement(_restartTabs.Tabs, {
+  return _react.default.createElement(_restartTabs.Tabs, {
     state: [index, setIndex]
   }, _react.default.createElement("div", {
+    className: "tabs",
+    ref: tabsRef
+  }, _react.default.createElement("div", {
     className: "tab-list"
-  }, _react.default.createElement(Tab, null, "tab 1"), _react.default.createElement(Tab, null, "tab 2"), _react.default.createElement(Tab, null, "tab 3")), _react.default.createElement(_framerMotion.motion.div, {
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Hello World from React \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8")), _react.default.createElement(_framerMotion.motion.div, {
     className: "tab-progress",
     key: index,
     initial: {
@@ -36332,11 +36336,127 @@ var _default = function _default() {
       ease: 'linear',
       duration: duration
     }
-  }), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Hello World from React \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8"))));
+  })));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","restart-tabs":"../node_modules/restart-tabs/dist/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./useHover":"useHover.js"}],"main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./useHover":"useHover.js"}],"height-tabs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _restartTabs = require("restart-tabs");
+
+var _framerMotion = require("framer-motion");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var cn = function cn() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.filter(Boolean).join(' ');
+};
+
+var Tab = function Tab(_ref) {
+  var children = _ref.children;
+
+  var _useTabState = (0, _restartTabs.useTabState)(),
+      isActive = _useTabState.isActive,
+      onClick = _useTabState.onClick;
+
+  return _react.default.createElement("button", {
+    className: cn('tab', isActive && 'active'),
+    onClick: onClick
+  }, children);
+};
+
+var PanelList = function PanelList(_ref2) {
+  var state = _ref2.state,
+      children = _ref2.children;
+  var panelRef = (0, _react.useRef)();
+
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      height = _useState2[0],
+      set = _useState2[1];
+
+  var _state = _slicedToArray(state, 1),
+      activeIndex = _state[0];
+
+  (0, _react.useEffect)(function () {
+    set(panelRef.current.offsetHeight);
+  }, [activeIndex, set]);
+  return _react.default.createElement(_framerMotion.motion.div, {
+    animate: {
+      height: height
+    },
+    style: {
+      overflow: 'hidden'
+    }
+  }, _react.default.createElement("div", {
+    ref: panelRef
+  }, (0, _react.cloneElement)(children[activeIndex], {
+    active: true
+  })));
+};
+
+var _default = function _default() {
+  var state = (0, _react.useState)(1);
+  return _react.default.createElement(_restartTabs.Tabs, {
+    state: state
+  }, _react.default.createElement("div", {
+    className: "tabs"
+  }, _react.default.createElement("div", {
+    className: "tab-list"
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(PanelList, {
+    state: state
+  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state."))), _react.default.createElement("div", {
+    className: "tab-progress"
+  })));
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+require("./App.css");
+
+require("./tabs.css");
+
+var _autoplayedTabs = _interopRequireDefault(require("./autoplayed-tabs"));
+
+var _heightTabs = _interopRequireDefault(require("./height-tabs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = function _default() {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -36376,7 +36496,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63210" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64914" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
