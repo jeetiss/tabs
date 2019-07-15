@@ -1,26 +1,31 @@
 .tabs {
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 450px;
+  width: 450px;
 
   padding: 24px 32px;
-  border: 1px solid #e2e2e2;
-  border-radius: 16px;
+  border: 1px solid #f1f1f1;
+  background-color: #fff;
   box-shadow: 0px 2px 24px 0px rgba(0, 0, 0, 0.1);
+
+  margin: 80px 0;
 }
 
 .tab-list {
   display: flex;
 
   padding-bottom: 24px;
-  border-bottom: 1px solid #e2e2e2;
 }
 
 .tab-progress {
-  width: 100%;
-  height: 3px;
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  height: 4px;
 
-  background-color: #e2e2e2;
+  background-color: #492796;
   transform-origin: 0%;
 }
 
@@ -30,13 +35,22 @@
   font-size: 16px;
   line-height: 24px;
   padding: 8px 16px;
-  background-color: #999;
-  color: white;
-  border-radius: 8px;
+  color: #492796;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
   margin-right: 24px;
+
+  transition: color 0.16s ease-in-out, background-color 0.16s ease-in-out,
+    border-color 0.16s ease-in-out;
 }
 
-.tab:disabled {
-  background-color: #555;
+.tab:focus {
+  box-shadow: 0 0 0 4px rgba(73, 39, 150, 0.5);
+}
+
+.tab.active {
+  background-color: #492796;
+  border-color: #492796;
+  color: white;
   cursor: default;
 }
