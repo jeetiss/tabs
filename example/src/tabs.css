@@ -54,3 +54,15 @@
   color: white;
   cursor: default;
 }
+
+.panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+}
+
+.panel {
+  position: absolute;
+}

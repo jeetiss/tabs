@@ -33,7 +33,7 @@ const PanelList = ({ state, children }) => {
 }
 
 export default () => {
-  const state = useState(1)
+  const state = useState(0)
 
   return (
     <Tabs state={state}>
