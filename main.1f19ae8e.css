@@ -45,8 +45,9 @@ p {
   position: absolute;
   left: -1px;
   right: -1px;
-  bottom: -1px;
+  top: 66px;
   height: 4px;
+  z-index: 0;
 
   background-color: #492796;
   transform-origin: 0%;

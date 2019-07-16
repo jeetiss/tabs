@@ -35600,11 +35600,11 @@ var _default = function _default() {
     className: "tabs"
   }, _react.default.createElement("div", {
     className: "tab-list"
-  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(PanelList, {
-    state: state
-  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "animations with framer/motion")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "is pure")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "\u2764\uFE0F"))), _react.default.createElement("div", {
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement("div", {
     className: "tab-progress"
-  })));
+  }), _react.default.createElement(PanelList, {
+    state: state
+  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "animations with framer/motion")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "is pure")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "\u2764\uFE0F")))));
 };
 
 exports.default = _default;
@@ -36435,7 +36435,7 @@ var _default = function _default() {
     ref: tabsRef
   }, _react.default.createElement("div", {
     className: "tab-list"
-  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Hello World from React \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8")), _react.default.createElement(_framerMotion.motion.div, {
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(_framerMotion.motion.div, {
     className: "tab-progress",
     key: index,
     initial: {
@@ -36450,7 +36450,7 @@ var _default = function _default() {
       ease: 'linear',
       duration: duration
     }
-  })));
+  }), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Hello World from React \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8"))));
 };
 
 exports.default = _default;
@@ -36537,11 +36537,11 @@ var _default = function _default() {
     className: "tabs"
   }, _react.default.createElement("div", {
     className: "tab-list"
-  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(PanelList, {
-    state: state
-  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state."))), _react.default.createElement("div", {
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement("div", {
     className: "tab-progress"
-  })));
+  }), _react.default.createElement(PanelList, {
+    state: state
+  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state.")))));
 };
 
 exports.default = _default;
@@ -36612,7 +36612,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50392" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
