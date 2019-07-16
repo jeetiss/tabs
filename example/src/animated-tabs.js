@@ -55,6 +55,8 @@ export default () => {
           <Tab>Tab 3</Tab>
         </div>
 
+        <div className='tab-progress' />
+
         <PanelList state={state}>
           <Panel>
             <p>animations with framer/motion</p>
@@ -68,8 +70,6 @@ export default () => {
             <p>❤️</p>
           </Panel>
         </PanelList>
-
-        <div className='tab-progress' />
       </div>
     </Tabs>
   )

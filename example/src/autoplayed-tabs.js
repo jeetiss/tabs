@@ -42,18 +42,6 @@ export default () => {
           <Tab>Tab 3</Tab>
         </div>
 
-        <Panel>
-          <h1>Hello World from React 📦 🚀</h1>
-        </Panel>
-
-        <Panel>
-          <h1>Tabs with hooks 🎣</h1>
-        </Panel>
-
-        <Panel>
-          <h1>So nice 🚨</h1>
-        </Panel>
-
         <motion.div
           className='tab-progress'
           key={index}
@@ -66,6 +54,18 @@ export default () => {
               : { ease: 'linear', duration }
           }
         />
+
+        <Panel>
+          <h1>Hello World from React 📦 🚀</h1>
+        </Panel>
+
+        <Panel>
+          <h1>Tabs with hooks 🎣</h1>
+        </Panel>
+
+        <Panel>
+          <h1>So nice 🚨</h1>
+        </Panel>
       </div>
     </Tabs>
   )

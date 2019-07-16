@@ -46,6 +46,8 @@ export default () => {
           <Tab>Tab 3</Tab>
         </div>
 
+        <div className='tab-progress' />
+
         <PanelList state={state}>
           <Panel>
             <p>
@@ -77,8 +79,6 @@ export default () => {
             </p>
           </Panel>
         </PanelList>
-
-        <div className='tab-progress' />
       </div>
     </Tabs>
   )
