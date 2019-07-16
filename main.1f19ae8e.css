@@ -78,5 +78,17 @@ p {
   cursor: default;
 }
 
+.panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+}
+
+.panel {
+  position: absolute;
+}
+
 
 /*# sourceMappingURL=/main.1f19ae8e.css.map */

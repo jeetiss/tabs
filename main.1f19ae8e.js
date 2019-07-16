@@ -25941,717 +25941,7 @@ const Panel = ({
 };
 
 exports.Panel = Panel;
-},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js"}],"../node_modules/@restart/hooks/esm/useCallbackRef.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useCallbackRef;
-
-var _react = require("react");
-
-/**
- * A convenience hook around `useState` designed to be paired with
- * the component [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) api.
- * Callback refs are useful over `useRef()` when you need to respond to the ref being set
- * instead of lazily accessing it in an effect.
- *
- * ```ts
- * const [element, attachRef] = useCallbackRef<HTMLDivElement>()
- *
- * useEffect(() => {
- *   if (!element) return
- *
- *   const calendar = new FullCalendar.Calendar(element)
- *
- *   return () => {
- *     calendar.destroy()
- *   }
- * }, [element])
- *
- * return <div ref={attachRef} />
- * ```
- */
-function useCallbackRef() {
-  return (0, _react.useState)(null);
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useCommittedRef.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-/**
- * Creates a `Ref` whose value is updated in an effect, ensuring the most recent
- * value is the one rendered with. Generally only required for Concurrent mode usage
- * where previous work in `render()` may be discarded befor being used.
- *
- * This is safe to access in an event handler.
- *
- * @param value The `Ref` value
- */
-function useCommittedRef(value) {
-  var ref = (0, _react.useRef)(value);
-  (0, _react.useEffect)(function () {
-    ref.current = value;
-  }, [value]);
-  return ref;
-}
-
-var _default = useCommittedRef;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useEventCallback.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useEventCallback;
-
-var _react = require("react");
-
-var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function useEventCallback(fn) {
-  var ref = (0, _useCommittedRef.default)(fn);
-  return (0, _react.useCallback)(function () {
-    return ref.current && ref.current.apply(ref, arguments);
-  }, [ref]);
-}
-},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useEventListener.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useEventListener;
-
-var _react = require("react");
-
-var _useEventCallback = _interopRequireDefault(require("./useEventCallback"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Attaches an event handler outside directly to specified DOM element
- * bypassing the react synthetic event system.
- *
- * @param element The target to listen for events on
- * @param event The DOM event name
- * @param handler An event handler
- * @param capture Whether or not to listen during the capture event phase
- */
-function useEventListener(eventTarget, event, listener, capture) {
-  if (capture === void 0) {
-    capture = false;
-  }
-
-  var handler = (0, _useEventCallback.default)(listener);
-  (0, _react.useEffect)(function () {
-    var target = typeof eventTarget === 'function' ? eventTarget() : eventTarget;
-    target.addEventListener(event, handler, capture);
-    return function () {
-      return target.removeEventListener(event, handler, capture);
-    };
-  }, [eventTarget]);
-}
-},{"react":"../node_modules/react/index.js","./useEventCallback":"../node_modules/@restart/hooks/esm/useEventCallback.js"}],"../node_modules/@restart/hooks/esm/useGlobalListener.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useGlobalListener;
-
-var _useEventListener = _interopRequireDefault(require("./useEventListener"));
-
-var _react = require("react");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Attaches an event handler outside directly to the `document`,
- * bypassing the react synthetic event system.
- *
- * ```ts
- * useGlobalListener('keydown', (event) => {
- *  console.log(event.key)
- * })
- * ```
- *
- * @param event The DOM event name
- * @param handler An event handler
- * @param capture Whether or not to listen during the capture event phase
- */
-function useGlobalListener(event, handler, capture) {
-  if (capture === void 0) {
-    capture = false;
-  }
-
-  var documentTarget = (0, _react.useCallback)(function () {
-    return document;
-  }, []);
-  return (0, _useEventListener.default)(documentTarget, event, handler, capture);
-}
-},{"./useEventListener":"../node_modules/@restart/hooks/esm/useEventListener.js","react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useInterval.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Creates a `setInterval` that is properly cleaned up when a component unmounted
- *
- * @param fn an function run on each interval
- * @param ms The milliseconds duration of the interval
- */
-function useInterval(fn, ms, paused) {
-  if (paused === void 0) {
-    paused = false;
-  }
-
-  var handle;
-  var fnRef = (0, _useCommittedRef.default)(fn); // this ref is necessary b/c useEffect will sometimes miss a paused toggle
-  // orphaning a setTimeout chain in the aether, so relying on it's refresh logic is not reliable.
-
-  var pausedRef = (0, _useCommittedRef.default)(paused);
-
-  var tick = function tick() {
-    if (pausedRef.current) return;
-    fnRef.current();
-    schedule(); // eslint-disable-line no-use-before-define
-  };
-
-  var schedule = function schedule() {
-    clearTimeout(handle);
-    handle = setTimeout(tick, ms);
-  };
-
-  (0, _react.useEffect)(function () {
-    tick();
-    return function () {
-      return clearTimeout(handle);
-    };
-  }, [paused]);
-}
-
-var _default = useInterval;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useRafInterval.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function useRafInterval(fn, ms, paused) {
-  if (paused === void 0) {
-    paused = false;
-  }
-
-  var handle;
-  var start = new Date().getTime();
-  var fnRef = (0, _useCommittedRef.default)(fn); // this ref is necessary b/c useEffect will sometimes miss a paused toggle
-  // orphaning a setTimeout chain in the aether, so relying on it's refresh logic is not reliable.
-
-  var pausedRef = (0, _useCommittedRef.default)(paused);
-
-  function loop() {
-    var current = new Date().getTime();
-    var delta = current - start;
-    if (pausedRef.current) return;
-
-    if (delta >= ms && fnRef.current) {
-      fnRef.current();
-      start = new Date().getTime();
-    }
-
-    cancelAnimationFrame(handle);
-    handle = requestAnimationFrame(loop);
-  }
-
-  (0, _react.useEffect)(function () {
-    handle = requestAnimationFrame(loop);
-    return function () {
-      return cancelAnimationFrame(handle);
-    };
-  }, []);
-}
-
-var _default = useRafInterval;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useMergeState.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useMergeState;
-
-var _react = require("react");
-
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-/**
- * Mimics a React class component's state model, of having a single unified
- * `state` object and an updater that merges updates into the existing state, as
- * opposed to replacing it.
- *
- * ```js
- * const [state, setState] = useMergeState({ name: 'Betsy', age: 24 })
- *
- * setState({ name: 'Johan' }) // { name: 'Johan', age: 24 }
- *
- * setState(state => ({ age: state.age + 10 })) // { name: 'Johan', age: 34 }
- * ```
- *
- * @param initialState The initial state object
- */
-function useMergeState(initialState) {
-  var _useState = (0, _react.useState)(initialState),
-      state = _useState[0],
-      setState = _useState[1];
-
-  var updater = function updater(update) {
-    if (update === null) return;
-
-    if (typeof update === 'function') {
-      setState(function (state) {
-        var nextState = update(state);
-        return nextState == null ? state : _extends({}, state, nextState);
-      });
-    } else {
-      setState(function (state) {
-        return _extends({}, state, update);
-      });
-    }
-  };
-
-  return [state, updater];
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useMergeStateFromProps.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useMergeStateFromProps;
-
-var _useMergeState2 = _interopRequireDefault(require("./useMergeState"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function useMergeStateFromProps(props, gDSFP, initialState) {
-  var _useMergeState = (0, _useMergeState2.default)(initialState),
-      state = _useMergeState[0],
-      setState = _useMergeState[1];
-
-  var nextState = gDSFP(props, state);
-  if (nextState !== null) setState(nextState);
-  return [state, setState];
-}
-},{"./useMergeState":"../node_modules/@restart/hooks/esm/useMergeState.js"}],"../node_modules/@restart/hooks/esm/useMounted.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useMounted;
-
-var _react = require("react");
-
-/**
- * Track whether a component is current mounted. Generally less preferable than
- * properlly canceling effects so they don't run after a component is unmounted,
- * but helpful in cases where that isn't feasible, such as a `Promise` resolution.
- *
- * @returns a function that returns the current isMounted state of the component
- *
- * ```ts
- * const [data, setData] = useState(null)
- * const isMounted = useMounted()
- *
- * useEffect(() => {
- *   fetchdata().then((newData) => {
- *      if (isMounted()) {
- *        setData(newData);
- *      }
- *   })
- * })
- * ```
- */
-function useMounted() {
-  var mounted = (0, _react.useRef)(true);
-  var isMounted = (0, _react.useRef)(function () {
-    return mounted.current;
-  });
-  (0, _react.useEffect)(function () {
-    return function () {
-      mounted.current = false;
-    };
-  }, []);
-  return isMounted.current;
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/usePrevious.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = usePrevious;
-
-var _react = require("react");
-
-/**
- * Store the last of some value. Tracked via a `Ref` only updating it
- * after the component renders.
- *
- * Helpful if you need to compare a prop value to it's previous value during render.
- *
- * ```ts
- * function Component(props) {
- *   const lastProps = usePrevious(props)
- *
- *   if (lastProps.foo !== props.foo)
- *     resetValueFromProps(props.foo)
- * }
- * ```
- *
- * @param value the value to track
- */
-function usePrevious(value) {
-  var ref = (0, _react.useRef)(null);
-  (0, _react.useEffect)(function () {
-    ref.current = value;
-  });
-  return ref.current;
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useImage.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useImage;
-
-var _react = require("react");
-
-/**
- * Fetch and load an image for programatic use such as in a `<canvas>` element.
- *
- * @param imageOrUrl The `HtmlImageElement` or image url to load
- * @param crossOrigin The `crossorigin` attribute to set
- *
- * ```ts
- * const { image, error } = useImage('/static/kittens.png')
- * const ref = useRef<HTMLCanvasElement>()
- *
- * useEffect(() => {
- *   const ctx = ref.current.getContext('2d')
- *
- *   if (image) {
- *     ctx.drawImage(image, 0, 0)
- *   }
- * }, [ref, image])
- *
- * return (
- *   <>
- *     {error && "there was a problem loading the image"}
- *     <canvas ref={ref} />
- *   </>
- * ```
- */
-function useImage(imageOrUrl, crossOrigin) {
-  var _useState = (0, _react.useState)({
-    image: null,
-    error: null
-  }),
-      state = _useState[0],
-      setState = _useState[1];
-
-  (0, _react.useEffect)(function () {
-    if (!imageOrUrl) return undefined;
-    var image;
-
-    if (typeof imageOrUrl === 'string') {
-      image = new Image();
-      image.src = imageOrUrl;
-      if (crossOrigin) image.crossOrigin = crossOrigin;
-    } else {
-      image = imageOrUrl;
-
-      if (image.complete && image.naturalHeight > 0) {
-        setState({
-          image: image,
-          error: null
-        });
-        return;
-      }
-    }
-
-    function onLoad() {
-      setState({
-        image: image,
-        error: null
-      });
-    }
-
-    function onError(error) {
-      setState({
-        image: image,
-        error: error
-      });
-    }
-
-    image.addEventListener('load', onLoad);
-    image.addEventListener('error', onError);
-    return function () {
-      image.removeEventListener('load', onLoad);
-      image.removeEventListener('error', onError);
-    };
-  }, [imageOrUrl, crossOrigin]);
-  return state;
-}
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useIsomorphicEffect.js":[function(require,module,exports) {
-var global = arguments[3];
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-var isReactNative = typeof global !== 'undefined' && // @ts-ignore
-global.navigator && // @ts-ignore
-global.navigator.product === 'ReactNative';
-var isDOM = typeof document !== 'undefined';
-/**
- * Is `useLayoutEffect` in a DOM or React Native environment, otherwise resolves to useEffect
- * Only useful to avoid the console warning.
- *
- * PREFER `useEffect` UNLESS YOU KNOW WHAT YOU ARE DOING.
- */
-
-var _default = isDOM || isReactNative ? _react.useLayoutEffect : _react.useEffect;
-
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useResizeObserver.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = useResizeObserver;
-
-var _react = require("react");
-
-var _useIsomorphicEffect = _interopRequireDefault(require("./useIsomorphicEffect"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var targetMap = new WeakMap();
-var resizeObserver;
-
-function getResizeObserver() {
-  // eslint-disable-next-line no-return-assign
-  return resizeObserver = resizeObserver || new window.ResizeObserver(function (entries) {
-    entries.forEach(function (entry) {
-      var handler = targetMap.get(entry.target);
-      if (handler) handler(entry.contentRect);
-    });
-  });
-}
-/**
- * Efficiently observe size changes on an element. Depends on the `ResizeObserver` api,
- * and polyfills are needed in older browsers.
- *
- * ```ts
- * const [ref, attachRef] = useCallbackRef(null);
- *
- * const rect = useResizeObserver(ref);
- *
- * return (
- *  <div ref={attachRef}>
- *    {JSON.stringify(rect)}
- *  </div>
- * )
- * ```
- *
- * @param element The DOM element to observe
- */
-
-
-function useResizeObserver(element) {
-  var _useState = (0, _react.useState)(null),
-      rect = _useState[0],
-      setRect = _useState[1];
-
-  (0, _useIsomorphicEffect.default)(function () {
-    if (!element) return;
-    getResizeObserver().observe(element);
-    setRect(element.getBoundingClientRect());
-    targetMap.set(element, function (rect) {
-      setRect(rect);
-    });
-    return function () {
-      targetMap.delete(element);
-    };
-  }, [element]);
-  return rect;
-}
-},{"react":"../node_modules/react/index.js","./useIsomorphicEffect":"../node_modules/@restart/hooks/esm/useIsomorphicEffect.js"}],"../node_modules/@restart/hooks/esm/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "useCallbackRef", {
-  enumerable: true,
-  get: function () {
-    return _useCallbackRef.default;
-  }
-});
-Object.defineProperty(exports, "useCommittedRef", {
-  enumerable: true,
-  get: function () {
-    return _useCommittedRef.default;
-  }
-});
-Object.defineProperty(exports, "useEventCallback", {
-  enumerable: true,
-  get: function () {
-    return _useEventCallback.default;
-  }
-});
-Object.defineProperty(exports, "useEventListener", {
-  enumerable: true,
-  get: function () {
-    return _useEventListener.default;
-  }
-});
-Object.defineProperty(exports, "useGlobalListener", {
-  enumerable: true,
-  get: function () {
-    return _useGlobalListener.default;
-  }
-});
-Object.defineProperty(exports, "useInterval", {
-  enumerable: true,
-  get: function () {
-    return _useInterval.default;
-  }
-});
-Object.defineProperty(exports, "useRafInterval", {
-  enumerable: true,
-  get: function () {
-    return _useRafInterval.default;
-  }
-});
-Object.defineProperty(exports, "useMergeState", {
-  enumerable: true,
-  get: function () {
-    return _useMergeState.default;
-  }
-});
-Object.defineProperty(exports, "useMergeStateFromProps", {
-  enumerable: true,
-  get: function () {
-    return _useMergeStateFromProps.default;
-  }
-});
-Object.defineProperty(exports, "useMounted", {
-  enumerable: true,
-  get: function () {
-    return _useMounted.default;
-  }
-});
-Object.defineProperty(exports, "usePrevious", {
-  enumerable: true,
-  get: function () {
-    return _usePrevious.default;
-  }
-});
-Object.defineProperty(exports, "useImage", {
-  enumerable: true,
-  get: function () {
-    return _useImage.default;
-  }
-});
-Object.defineProperty(exports, "useResizeObserver", {
-  enumerable: true,
-  get: function () {
-    return _useResizeObserver.default;
-  }
-});
-
-var _useCallbackRef = _interopRequireDefault(require("./useCallbackRef"));
-
-var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
-
-var _useEventCallback = _interopRequireDefault(require("./useEventCallback"));
-
-var _useEventListener = _interopRequireDefault(require("./useEventListener"));
-
-var _useGlobalListener = _interopRequireDefault(require("./useGlobalListener"));
-
-var _useInterval = _interopRequireDefault(require("./useInterval"));
-
-var _useRafInterval = _interopRequireDefault(require("./useRafInterval"));
-
-var _useMergeState = _interopRequireDefault(require("./useMergeState"));
-
-var _useMergeStateFromProps = _interopRequireDefault(require("./useMergeStateFromProps"));
-
-var _useMounted = _interopRequireDefault(require("./useMounted"));
-
-var _usePrevious = _interopRequireDefault(require("./usePrevious"));
-
-var _useImage = _interopRequireDefault(require("./useImage"));
-
-var _useResizeObserver = _interopRequireDefault(require("./useResizeObserver"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./useCallbackRef":"../node_modules/@restart/hooks/esm/useCallbackRef.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js","./useEventCallback":"../node_modules/@restart/hooks/esm/useEventCallback.js","./useEventListener":"../node_modules/@restart/hooks/esm/useEventListener.js","./useGlobalListener":"../node_modules/@restart/hooks/esm/useGlobalListener.js","./useInterval":"../node_modules/@restart/hooks/esm/useInterval.js","./useRafInterval":"../node_modules/@restart/hooks/esm/useRafInterval.js","./useMergeState":"../node_modules/@restart/hooks/esm/useMergeState.js","./useMergeStateFromProps":"../node_modules/@restart/hooks/esm/useMergeStateFromProps.js","./useMounted":"../node_modules/@restart/hooks/esm/useMounted.js","./usePrevious":"../node_modules/@restart/hooks/esm/usePrevious.js","./useImage":"../node_modules/@restart/hooks/esm/useImage.js","./useResizeObserver":"../node_modules/@restart/hooks/esm/useResizeObserver.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36204,7 +35494,831 @@ var AnimatePresence = function (_a) {
 };
 
 exports.AnimatePresence = AnimatePresence;
-},{"react":"../node_modules/react/index.js","framesync":"../node_modules/framesync/dist/framesync.es.js","@popmotion/popcorn":"../node_modules/@popmotion/popcorn/dist/popcorn.es.js","stylefire":"../node_modules/stylefire/dist/stylefire.es.js","hey-listen":"../node_modules/hey-listen/dist/hey-listen.es.js","style-value-types":"../node_modules/style-value-types/dist/style-value-types.es.js","popmotion":"../node_modules/popmotion/dist/popmotion.es.js","@popmotion/easing":"../node_modules/@popmotion/easing/dist/easing.es.js"}],"useHover.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","framesync":"../node_modules/framesync/dist/framesync.es.js","@popmotion/popcorn":"../node_modules/@popmotion/popcorn/dist/popcorn.es.js","stylefire":"../node_modules/stylefire/dist/stylefire.es.js","hey-listen":"../node_modules/hey-listen/dist/hey-listen.es.js","style-value-types":"../node_modules/style-value-types/dist/style-value-types.es.js","popmotion":"../node_modules/popmotion/dist/popmotion.es.js","@popmotion/easing":"../node_modules/@popmotion/easing/dist/easing.es.js"}],"animated-tabs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _restartTabs = require("restart-tabs");
+
+var _framerMotion = require("framer-motion");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var cn = function cn() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.filter(Boolean).join(' ');
+};
+
+var Tab = function Tab(_ref) {
+  var children = _ref.children;
+
+  var _useTabState = (0, _restartTabs.useTabState)(),
+      isActive = _useTabState.isActive,
+      onClick = _useTabState.onClick;
+
+  return _react.default.createElement("button", {
+    className: cn('tab', isActive && 'active'),
+    onClick: onClick
+  }, children);
+};
+
+var PanelList = function PanelList(_ref2) {
+  var state = _ref2.state,
+      children = _ref2.children;
+  var panelRef = (0, _react.useRef)();
+
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      height = _useState2[0],
+      set = _useState2[1];
+
+  var _state = _slicedToArray(state, 1),
+      activeIndex = _state[0];
+
+  (0, _react.useEffect)(function () {
+    panelRef.current && set(panelRef.current.offsetHeight);
+  }, [activeIndex, set]);
+  return _react.default.createElement(_framerMotion.motion.ul, {
+    className: "panel-list",
+    animate: {
+      height: height
+    }
+  }, _react.default.createElement(_framerMotion.AnimatePresence, {
+    initial: false
+  }, _react.default.createElement(_framerMotion.motion.li, {
+    ref: panelRef,
+    className: "panel",
+    key: activeIndex,
+    initial: {
+      opacity: 0,
+      x: -32
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.1,
+        ease: 'easeInOut',
+        duration: 0.2
+      }
+    },
+    exit: {
+      opacity: 0,
+      x: 32,
+      transition: {
+        ease: 'easeInOut',
+        duration: 0.2
+      }
+    }
+  }, (0, _react.cloneElement)(children[activeIndex], {
+    active: true
+  }))));
+};
+
+var _default = function _default() {
+  var state = (0, _react.useState)(0);
+  return _react.default.createElement(_restartTabs.Tabs, {
+    state: state
+  }, _react.default.createElement("div", {
+    className: "tabs"
+  }, _react.default.createElement("div", {
+    className: "tab-list"
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement(PanelList, {
+    state: state
+  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "animations with framer/motion")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "is pure")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "\u2764\uFE0F"))), _react.default.createElement("div", {
+    className: "tab-progress"
+  })));
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"../node_modules/@restart/hooks/esm/useCallbackRef.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useCallbackRef;
+
+var _react = require("react");
+
+/**
+ * A convenience hook around `useState` designed to be paired with
+ * the component [callback ref](https://reactjs.org/docs/refs-and-the-dom.html#callback-refs) api.
+ * Callback refs are useful over `useRef()` when you need to respond to the ref being set
+ * instead of lazily accessing it in an effect.
+ *
+ * ```ts
+ * const [element, attachRef] = useCallbackRef<HTMLDivElement>()
+ *
+ * useEffect(() => {
+ *   if (!element) return
+ *
+ *   const calendar = new FullCalendar.Calendar(element)
+ *
+ *   return () => {
+ *     calendar.destroy()
+ *   }
+ * }, [element])
+ *
+ * return <div ref={attachRef} />
+ * ```
+ */
+function useCallbackRef() {
+  return (0, _react.useState)(null);
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useCommittedRef.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+/**
+ * Creates a `Ref` whose value is updated in an effect, ensuring the most recent
+ * value is the one rendered with. Generally only required for Concurrent mode usage
+ * where previous work in `render()` may be discarded befor being used.
+ *
+ * This is safe to access in an event handler.
+ *
+ * @param value The `Ref` value
+ */
+function useCommittedRef(value) {
+  var ref = (0, _react.useRef)(value);
+  (0, _react.useEffect)(function () {
+    ref.current = value;
+  }, [value]);
+  return ref;
+}
+
+var _default = useCommittedRef;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useEventCallback.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useEventCallback;
+
+var _react = require("react");
+
+var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function useEventCallback(fn) {
+  var ref = (0, _useCommittedRef.default)(fn);
+  return (0, _react.useCallback)(function () {
+    return ref.current && ref.current.apply(ref, arguments);
+  }, [ref]);
+}
+},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useEventListener.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useEventListener;
+
+var _react = require("react");
+
+var _useEventCallback = _interopRequireDefault(require("./useEventCallback"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Attaches an event handler outside directly to specified DOM element
+ * bypassing the react synthetic event system.
+ *
+ * @param element The target to listen for events on
+ * @param event The DOM event name
+ * @param handler An event handler
+ * @param capture Whether or not to listen during the capture event phase
+ */
+function useEventListener(eventTarget, event, listener, capture) {
+  if (capture === void 0) {
+    capture = false;
+  }
+
+  var handler = (0, _useEventCallback.default)(listener);
+  (0, _react.useEffect)(function () {
+    var target = typeof eventTarget === 'function' ? eventTarget() : eventTarget;
+    target.addEventListener(event, handler, capture);
+    return function () {
+      return target.removeEventListener(event, handler, capture);
+    };
+  }, [eventTarget]);
+}
+},{"react":"../node_modules/react/index.js","./useEventCallback":"../node_modules/@restart/hooks/esm/useEventCallback.js"}],"../node_modules/@restart/hooks/esm/useGlobalListener.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useGlobalListener;
+
+var _useEventListener = _interopRequireDefault(require("./useEventListener"));
+
+var _react = require("react");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Attaches an event handler outside directly to the `document`,
+ * bypassing the react synthetic event system.
+ *
+ * ```ts
+ * useGlobalListener('keydown', (event) => {
+ *  console.log(event.key)
+ * })
+ * ```
+ *
+ * @param event The DOM event name
+ * @param handler An event handler
+ * @param capture Whether or not to listen during the capture event phase
+ */
+function useGlobalListener(event, handler, capture) {
+  if (capture === void 0) {
+    capture = false;
+  }
+
+  var documentTarget = (0, _react.useCallback)(function () {
+    return document;
+  }, []);
+  return (0, _useEventListener.default)(documentTarget, event, handler, capture);
+}
+},{"./useEventListener":"../node_modules/@restart/hooks/esm/useEventListener.js","react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useInterval.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Creates a `setInterval` that is properly cleaned up when a component unmounted
+ *
+ * @param fn an function run on each interval
+ * @param ms The milliseconds duration of the interval
+ */
+function useInterval(fn, ms, paused) {
+  if (paused === void 0) {
+    paused = false;
+  }
+
+  var handle;
+  var fnRef = (0, _useCommittedRef.default)(fn); // this ref is necessary b/c useEffect will sometimes miss a paused toggle
+  // orphaning a setTimeout chain in the aether, so relying on it's refresh logic is not reliable.
+
+  var pausedRef = (0, _useCommittedRef.default)(paused);
+
+  var tick = function tick() {
+    if (pausedRef.current) return;
+    fnRef.current();
+    schedule(); // eslint-disable-line no-use-before-define
+  };
+
+  var schedule = function schedule() {
+    clearTimeout(handle);
+    handle = setTimeout(tick, ms);
+  };
+
+  (0, _react.useEffect)(function () {
+    tick();
+    return function () {
+      return clearTimeout(handle);
+    };
+  }, [paused]);
+}
+
+var _default = useInterval;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useRafInterval.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function useRafInterval(fn, ms, paused) {
+  if (paused === void 0) {
+    paused = false;
+  }
+
+  var handle;
+  var start = new Date().getTime();
+  var fnRef = (0, _useCommittedRef.default)(fn); // this ref is necessary b/c useEffect will sometimes miss a paused toggle
+  // orphaning a setTimeout chain in the aether, so relying on it's refresh logic is not reliable.
+
+  var pausedRef = (0, _useCommittedRef.default)(paused);
+
+  function loop() {
+    var current = new Date().getTime();
+    var delta = current - start;
+    if (pausedRef.current) return;
+
+    if (delta >= ms && fnRef.current) {
+      fnRef.current();
+      start = new Date().getTime();
+    }
+
+    cancelAnimationFrame(handle);
+    handle = requestAnimationFrame(loop);
+  }
+
+  (0, _react.useEffect)(function () {
+    handle = requestAnimationFrame(loop);
+    return function () {
+      return cancelAnimationFrame(handle);
+    };
+  }, []);
+}
+
+var _default = useRafInterval;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js"}],"../node_modules/@restart/hooks/esm/useMergeState.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useMergeState;
+
+var _react = require("react");
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/**
+ * Mimics a React class component's state model, of having a single unified
+ * `state` object and an updater that merges updates into the existing state, as
+ * opposed to replacing it.
+ *
+ * ```js
+ * const [state, setState] = useMergeState({ name: 'Betsy', age: 24 })
+ *
+ * setState({ name: 'Johan' }) // { name: 'Johan', age: 24 }
+ *
+ * setState(state => ({ age: state.age + 10 })) // { name: 'Johan', age: 34 }
+ * ```
+ *
+ * @param initialState The initial state object
+ */
+function useMergeState(initialState) {
+  var _useState = (0, _react.useState)(initialState),
+      state = _useState[0],
+      setState = _useState[1];
+
+  var updater = function updater(update) {
+    if (update === null) return;
+
+    if (typeof update === 'function') {
+      setState(function (state) {
+        var nextState = update(state);
+        return nextState == null ? state : _extends({}, state, nextState);
+      });
+    } else {
+      setState(function (state) {
+        return _extends({}, state, update);
+      });
+    }
+  };
+
+  return [state, updater];
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useMergeStateFromProps.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useMergeStateFromProps;
+
+var _useMergeState2 = _interopRequireDefault(require("./useMergeState"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function useMergeStateFromProps(props, gDSFP, initialState) {
+  var _useMergeState = (0, _useMergeState2.default)(initialState),
+      state = _useMergeState[0],
+      setState = _useMergeState[1];
+
+  var nextState = gDSFP(props, state);
+  if (nextState !== null) setState(nextState);
+  return [state, setState];
+}
+},{"./useMergeState":"../node_modules/@restart/hooks/esm/useMergeState.js"}],"../node_modules/@restart/hooks/esm/useMounted.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useMounted;
+
+var _react = require("react");
+
+/**
+ * Track whether a component is current mounted. Generally less preferable than
+ * properlly canceling effects so they don't run after a component is unmounted,
+ * but helpful in cases where that isn't feasible, such as a `Promise` resolution.
+ *
+ * @returns a function that returns the current isMounted state of the component
+ *
+ * ```ts
+ * const [data, setData] = useState(null)
+ * const isMounted = useMounted()
+ *
+ * useEffect(() => {
+ *   fetchdata().then((newData) => {
+ *      if (isMounted()) {
+ *        setData(newData);
+ *      }
+ *   })
+ * })
+ * ```
+ */
+function useMounted() {
+  var mounted = (0, _react.useRef)(true);
+  var isMounted = (0, _react.useRef)(function () {
+    return mounted.current;
+  });
+  (0, _react.useEffect)(function () {
+    return function () {
+      mounted.current = false;
+    };
+  }, []);
+  return isMounted.current;
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/usePrevious.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = usePrevious;
+
+var _react = require("react");
+
+/**
+ * Store the last of some value. Tracked via a `Ref` only updating it
+ * after the component renders.
+ *
+ * Helpful if you need to compare a prop value to it's previous value during render.
+ *
+ * ```ts
+ * function Component(props) {
+ *   const lastProps = usePrevious(props)
+ *
+ *   if (lastProps.foo !== props.foo)
+ *     resetValueFromProps(props.foo)
+ * }
+ * ```
+ *
+ * @param value the value to track
+ */
+function usePrevious(value) {
+  var ref = (0, _react.useRef)(null);
+  (0, _react.useEffect)(function () {
+    ref.current = value;
+  });
+  return ref.current;
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useImage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useImage;
+
+var _react = require("react");
+
+/**
+ * Fetch and load an image for programatic use such as in a `<canvas>` element.
+ *
+ * @param imageOrUrl The `HtmlImageElement` or image url to load
+ * @param crossOrigin The `crossorigin` attribute to set
+ *
+ * ```ts
+ * const { image, error } = useImage('/static/kittens.png')
+ * const ref = useRef<HTMLCanvasElement>()
+ *
+ * useEffect(() => {
+ *   const ctx = ref.current.getContext('2d')
+ *
+ *   if (image) {
+ *     ctx.drawImage(image, 0, 0)
+ *   }
+ * }, [ref, image])
+ *
+ * return (
+ *   <>
+ *     {error && "there was a problem loading the image"}
+ *     <canvas ref={ref} />
+ *   </>
+ * ```
+ */
+function useImage(imageOrUrl, crossOrigin) {
+  var _useState = (0, _react.useState)({
+    image: null,
+    error: null
+  }),
+      state = _useState[0],
+      setState = _useState[1];
+
+  (0, _react.useEffect)(function () {
+    if (!imageOrUrl) return undefined;
+    var image;
+
+    if (typeof imageOrUrl === 'string') {
+      image = new Image();
+      image.src = imageOrUrl;
+      if (crossOrigin) image.crossOrigin = crossOrigin;
+    } else {
+      image = imageOrUrl;
+
+      if (image.complete && image.naturalHeight > 0) {
+        setState({
+          image: image,
+          error: null
+        });
+        return;
+      }
+    }
+
+    function onLoad() {
+      setState({
+        image: image,
+        error: null
+      });
+    }
+
+    function onError(error) {
+      setState({
+        image: image,
+        error: error
+      });
+    }
+
+    image.addEventListener('load', onLoad);
+    image.addEventListener('error', onError);
+    return function () {
+      image.removeEventListener('load', onLoad);
+      image.removeEventListener('error', onError);
+    };
+  }, [imageOrUrl, crossOrigin]);
+  return state;
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useIsomorphicEffect.js":[function(require,module,exports) {
+var global = arguments[3];
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var isReactNative = typeof global !== 'undefined' && // @ts-ignore
+global.navigator && // @ts-ignore
+global.navigator.product === 'ReactNative';
+var isDOM = typeof document !== 'undefined';
+/**
+ * Is `useLayoutEffect` in a DOM or React Native environment, otherwise resolves to useEffect
+ * Only useful to avoid the console warning.
+ *
+ * PREFER `useEffect` UNLESS YOU KNOW WHAT YOU ARE DOING.
+ */
+
+var _default = isDOM || isReactNative ? _react.useLayoutEffect : _react.useEffect;
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@restart/hooks/esm/useResizeObserver.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useResizeObserver;
+
+var _react = require("react");
+
+var _useIsomorphicEffect = _interopRequireDefault(require("./useIsomorphicEffect"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var targetMap = new WeakMap();
+var resizeObserver;
+
+function getResizeObserver() {
+  // eslint-disable-next-line no-return-assign
+  return resizeObserver = resizeObserver || new window.ResizeObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var handler = targetMap.get(entry.target);
+      if (handler) handler(entry.contentRect);
+    });
+  });
+}
+/**
+ * Efficiently observe size changes on an element. Depends on the `ResizeObserver` api,
+ * and polyfills are needed in older browsers.
+ *
+ * ```ts
+ * const [ref, attachRef] = useCallbackRef(null);
+ *
+ * const rect = useResizeObserver(ref);
+ *
+ * return (
+ *  <div ref={attachRef}>
+ *    {JSON.stringify(rect)}
+ *  </div>
+ * )
+ * ```
+ *
+ * @param element The DOM element to observe
+ */
+
+
+function useResizeObserver(element) {
+  var _useState = (0, _react.useState)(null),
+      rect = _useState[0],
+      setRect = _useState[1];
+
+  (0, _useIsomorphicEffect.default)(function () {
+    if (!element) return;
+    getResizeObserver().observe(element);
+    setRect(element.getBoundingClientRect());
+    targetMap.set(element, function (rect) {
+      setRect(rect);
+    });
+    return function () {
+      targetMap.delete(element);
+    };
+  }, [element]);
+  return rect;
+}
+},{"react":"../node_modules/react/index.js","./useIsomorphicEffect":"../node_modules/@restart/hooks/esm/useIsomorphicEffect.js"}],"../node_modules/@restart/hooks/esm/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "useCallbackRef", {
+  enumerable: true,
+  get: function () {
+    return _useCallbackRef.default;
+  }
+});
+Object.defineProperty(exports, "useCommittedRef", {
+  enumerable: true,
+  get: function () {
+    return _useCommittedRef.default;
+  }
+});
+Object.defineProperty(exports, "useEventCallback", {
+  enumerable: true,
+  get: function () {
+    return _useEventCallback.default;
+  }
+});
+Object.defineProperty(exports, "useEventListener", {
+  enumerable: true,
+  get: function () {
+    return _useEventListener.default;
+  }
+});
+Object.defineProperty(exports, "useGlobalListener", {
+  enumerable: true,
+  get: function () {
+    return _useGlobalListener.default;
+  }
+});
+Object.defineProperty(exports, "useInterval", {
+  enumerable: true,
+  get: function () {
+    return _useInterval.default;
+  }
+});
+Object.defineProperty(exports, "useRafInterval", {
+  enumerable: true,
+  get: function () {
+    return _useRafInterval.default;
+  }
+});
+Object.defineProperty(exports, "useMergeState", {
+  enumerable: true,
+  get: function () {
+    return _useMergeState.default;
+  }
+});
+Object.defineProperty(exports, "useMergeStateFromProps", {
+  enumerable: true,
+  get: function () {
+    return _useMergeStateFromProps.default;
+  }
+});
+Object.defineProperty(exports, "useMounted", {
+  enumerable: true,
+  get: function () {
+    return _useMounted.default;
+  }
+});
+Object.defineProperty(exports, "usePrevious", {
+  enumerable: true,
+  get: function () {
+    return _usePrevious.default;
+  }
+});
+Object.defineProperty(exports, "useImage", {
+  enumerable: true,
+  get: function () {
+    return _useImage.default;
+  }
+});
+Object.defineProperty(exports, "useResizeObserver", {
+  enumerable: true,
+  get: function () {
+    return _useResizeObserver.default;
+  }
+});
+
+var _useCallbackRef = _interopRequireDefault(require("./useCallbackRef"));
+
+var _useCommittedRef = _interopRequireDefault(require("./useCommittedRef"));
+
+var _useEventCallback = _interopRequireDefault(require("./useEventCallback"));
+
+var _useEventListener = _interopRequireDefault(require("./useEventListener"));
+
+var _useGlobalListener = _interopRequireDefault(require("./useGlobalListener"));
+
+var _useInterval = _interopRequireDefault(require("./useInterval"));
+
+var _useRafInterval = _interopRequireDefault(require("./useRafInterval"));
+
+var _useMergeState = _interopRequireDefault(require("./useMergeState"));
+
+var _useMergeStateFromProps = _interopRequireDefault(require("./useMergeStateFromProps"));
+
+var _useMounted = _interopRequireDefault(require("./useMounted"));
+
+var _usePrevious = _interopRequireDefault(require("./usePrevious"));
+
+var _useImage = _interopRequireDefault(require("./useImage"));
+
+var _useResizeObserver = _interopRequireDefault(require("./useResizeObserver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./useCallbackRef":"../node_modules/@restart/hooks/esm/useCallbackRef.js","./useCommittedRef":"../node_modules/@restart/hooks/esm/useCommittedRef.js","./useEventCallback":"../node_modules/@restart/hooks/esm/useEventCallback.js","./useEventListener":"../node_modules/@restart/hooks/esm/useEventListener.js","./useGlobalListener":"../node_modules/@restart/hooks/esm/useGlobalListener.js","./useInterval":"../node_modules/@restart/hooks/esm/useInterval.js","./useRafInterval":"../node_modules/@restart/hooks/esm/useRafInterval.js","./useMergeState":"../node_modules/@restart/hooks/esm/useMergeState.js","./useMergeStateFromProps":"../node_modules/@restart/hooks/esm/useMergeStateFromProps.js","./useMounted":"../node_modules/@restart/hooks/esm/useMounted.js","./usePrevious":"../node_modules/@restart/hooks/esm/usePrevious.js","./useImage":"../node_modules/@restart/hooks/esm/useImage.js","./useResizeObserver":"../node_modules/@restart/hooks/esm/useResizeObserver.js"}],"useHover.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36416,7 +36530,7 @@ var PanelList = function PanelList(_ref2) {
 };
 
 var _default = function _default() {
-  var state = (0, _react.useState)(1);
+  var state = (0, _react.useState)(0);
   return _react.default.createElement(_restartTabs.Tabs, {
     state: state
   }, _react.default.createElement("div", {
@@ -36445,6 +36559,8 @@ require("./App.css");
 
 require("./tabs.css");
 
+var _animatedTabs = _interopRequireDefault(require("./animated-tabs"));
+
 var _autoplayedTabs = _interopRequireDefault(require("./autoplayed-tabs"));
 
 var _heightTabs = _interopRequireDefault(require("./height-tabs"));
@@ -36452,11 +36568,11 @@ var _heightTabs = _interopRequireDefault(require("./height-tabs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = function _default() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_animatedTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -36496,7 +36612,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64914" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50392" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
