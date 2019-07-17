@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './app.css'
 import './tabs.css'
 
 import SimpleTabs from './simple-tabs'
