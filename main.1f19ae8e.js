@@ -25941,7 +25941,53 @@ const Panel = ({
 };
 
 exports.Panel = Panel;
-},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js"}],"simple-tabs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _restartTabs = require("restart-tabs");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cn = function cn() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.filter(Boolean).join(' ');
+};
+
+var Tab = function Tab(_ref) {
+  var children = _ref.children;
+
+  var _useTabState = (0, _restartTabs.useTabState)(),
+      isActive = _useTabState.isActive,
+      onClick = _useTabState.onClick;
+
+  return _react.default.createElement("button", {
+    className: cn('tab', isActive && 'active'),
+    onClick: onClick
+  }, children);
+};
+
+var _default = function _default() {
+  return _react.default.createElement(_restartTabs.Tabs, null, _react.default.createElement("div", {
+    className: "tabs"
+  }, _react.default.createElement("div", {
+    className: "tab-list"
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement("div", {
+    className: "tab-progress"
+  }), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state."))));
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36559,6 +36605,8 @@ require("./App.css");
 
 require("./tabs.css");
 
+var _simpleTabs = _interopRequireDefault(require("./simple-tabs"));
+
 var _animatedTabs = _interopRequireDefault(require("./animated-tabs"));
 
 var _autoplayedTabs = _interopRequireDefault(require("./autoplayed-tabs"));
@@ -36568,11 +36616,11 @@ var _heightTabs = _interopRequireDefault(require("./height-tabs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = function _default() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_animatedTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_simpleTabs.default, null), _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_animatedTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./simple-tabs":"simple-tabs.js","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -36612,7 +36660,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57025" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50487" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
