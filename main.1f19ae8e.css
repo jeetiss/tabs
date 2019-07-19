@@ -54,12 +54,14 @@ p {
 }
 
 .tab {
+  outline: none;
   cursor: pointer;
   border: none;
   font-size: 16px;
   line-height: 24px;
   padding: 8px 16px;
   color: #492796;
+  background-color: #fff;
   border: 1px solid #f1f1f1;
   box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
   margin-right: 24px;
@@ -68,8 +70,13 @@ p {
     border-color 0.16s ease-in-out;
 }
 
-.tab:focus {
+.tab:focus,
+.tab:focus-visible {
   box-shadow: 0 0 0 4px rgba(73, 39, 150, 0.5);
+}
+
+.tab:focus:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .tab.active {

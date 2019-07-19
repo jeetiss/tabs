@@ -25815,7 +25815,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"App.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"app.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -35856,7 +35856,7 @@ function useInterval(fn, ms, paused) {
   };
 
   (0, _react.useEffect)(function () {
-    tick();
+    schedule();
     return function () {
       return clearTimeout(handle);
     };
@@ -36591,7 +36591,7 @@ var _default = function _default() {
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36601,7 +36601,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-require("./App.css");
+require("./app.css");
 
 require("./tabs.css");
 
@@ -36620,19 +36620,19 @@ var _default = function _default() {
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./App.css":"App.css","./tabs.css":"tabs.css","./simple-tabs":"simple-tabs.js","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./app.css":"app.css","./tabs.css":"tabs.css","./simple-tabs":"simple-tabs.js","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = require("react-dom");
 
-var _App = _interopRequireDefault(require("./App.js"));
+var _app = _interopRequireDefault(require("./app"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react.default.createElement(_App.default, null), document.getElementById('app'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App.js":"App.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+(0, _reactDom.render)(_react.default.createElement(_app.default, null), document.getElementById('app'));
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./app":"app.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -36660,7 +36660,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50487" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50799" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
