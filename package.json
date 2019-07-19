@@ -1,8 +1,10 @@
 {
   "name": "@bumaga/tabs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "module": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": "jeetiss/tabs",
   "scripts": {
     "build": "babel src -d dist"
