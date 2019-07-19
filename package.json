@@ -1,11 +1,18 @@
 {
   "name": "@bumaga/tabs",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
   "version": "0.1.0",
+  "module": "dist/index.js",
   "files": ["dist"],
+  "repository": "jeetiss/tabs",
   "scripts": {
     "build": "babel src -d dist"
+  },
+  "dependencies": {
+    "use-constant": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -21,11 +28,6 @@
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-plugin-standard": "^4.0.0"
   },
-  "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
-  },
-  "dependencies": {
-    "use-constant": "^1.0.0"
-  }
+  "author": "Ivakhnenko Dmitry <jeetiss@ya.ru>",
+  "license": "ISC"
 }
