@@ -1,9 +1,9 @@
 {
-  "private": true,
-  "name": "restart-tabs",
+  "name": "@bumaga/tabs",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "files": ["dist"],
   "scripts": {
     "build": "babel src -d dist"
   },

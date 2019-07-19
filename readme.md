@@ -1,4 +1,4 @@
-# Tabs
+# @bumaga/tabs
 
 React Tabs
 

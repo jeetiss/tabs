@@ -75,5 +75,5 @@ export const Tab = ({ children }) => {
 export const Panel = ({ active, children }) => {
   const isActive = usePanelState()
 
-  return (isActive || active) ? children : null
+  return isActive || active ? children : null
 }

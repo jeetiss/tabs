@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html",
-    "predeploy": "parcel build src/index.html --public-url /restart-tabs",
+    "predeploy": "parcel build src/index.html --public-url /tabs",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
