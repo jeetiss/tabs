@@ -827,10 +827,10 @@
     hey-listen "^1.0.8"
     style-value-types "^3.1.5"
 
-"@restart/hooks@^0.3.7":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.7.tgz#8d2768be4822260db7ce074f23ee70d19317fba1"
-  integrity sha512-6jcSoS7VIJf/KMN4AoSwWyZfvl3pFwIrZAD0krvcawnKlMQ68mFkHLjZskPnp0nP7oTMnirNIgn4flIegD+sJw==
+"@restart/hooks@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.8.tgz#2f34f503d92ad95586c34f1175d6743f3a520a4e"
+  integrity sha512-0AO6p7iOqWeLu9++Qz1P0efRmA7nDT3uMx4banEUj0KZLNOBkK98zddsKtRjwBlJw2dbL/V+u5+recuCwjO/pg==
 
 "@types/q@^1.5.1":
   version "1.5.2"
@@ -4645,7 +4645,7 @@ resolve@^1.1.5, resolve@^1.3.2, resolve@^1.4.0:
     path-parse "^1.0.6"
 
 restart-tabs@../:
-  version "0.0.0"
+  version "0.0.1"
   dependencies:
     use-constant "^1.0.0"
 
