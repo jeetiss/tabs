@@ -36591,7 +36591,77 @@ var _default = function _default() {
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"accordion.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"accordion.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _restartTabs = require("restart-tabs");
+
+var _framerMotion = require("framer-motion");
+
+require("./accordion.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cn = function cn() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.filter(Boolean).join(' ');
+};
+
+var Tab = function Tab(_ref) {
+  var children = _ref.children;
+
+  var _useTabState = (0, _restartTabs.useTabState)(),
+      isActive = _useTabState.isActive,
+      onClick = _useTabState.onClick;
+
+  return _react.default.createElement("button", {
+    className: cn('accordion-tab', isActive && 'active'),
+    onClick: onClick
+  }, children);
+};
+
+var panel = {
+  hidden: {
+    height: 0
+  },
+  visible: {
+    height: 'auto'
+  }
+};
+
+var Panel = function Panel(_ref2) {
+  var children = _ref2.children;
+  var isActive = (0, _restartTabs.usePanelState)();
+  return _react.default.createElement(_framerMotion.motion.div, {
+    className: "accordion-panel",
+    animate: isActive ? 'visible' : 'hidden',
+    variants: panel
+  }, children);
+};
+
+var _default = function _default() {
+  return _react.default.createElement(_restartTabs.Tabs, null, _react.default.createElement("div", {
+    className: "accordion"
+  }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state.")), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(Tab, null, "Tab 3"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc."))));
+};
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./accordion.css":"accordion.css"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36613,14 +36683,16 @@ var _autoplayedTabs = _interopRequireDefault(require("./autoplayed-tabs"));
 
 var _heightTabs = _interopRequireDefault(require("./height-tabs"));
 
+var _accordion = _interopRequireDefault(require("./accordion"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = function _default() {
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_simpleTabs.default, null), _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_animatedTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null));
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_simpleTabs.default, null), _react.default.createElement(_heightTabs.default, null), _react.default.createElement(_animatedTabs.default, null), _react.default.createElement(_autoplayedTabs.default, null), _react.default.createElement(_accordion.default, null));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./app.css":"app.css","./tabs.css":"tabs.css","./simple-tabs":"simple-tabs.js","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js"}],"main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./app.css":"app.css","./tabs.css":"tabs.css","./simple-tabs":"simple-tabs.js","./animated-tabs":"animated-tabs.js","./autoplayed-tabs":"autoplayed-tabs.js","./height-tabs":"height-tabs.js","./accordion":"accordion.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -36660,7 +36732,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50799" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54092" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
