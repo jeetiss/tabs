@@ -1,6 +1,12 @@
 # @bumaga/tabs
 
-React Tabs
+Headless tabs component for React
+
+## Features
+
+- 📦 super small, 381 B vs 3.5kB [react-tabs](https://github.com/reactjs/react-tabs) 
+- 🚫 no styles, just logic. Style what you want, as you want
+- 🎣 componsents and hooks API
 
 ## Install
 
