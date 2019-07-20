@@ -6,6 +6,7 @@ import SimpleTabs from './simple-tabs'
 import AnimatedTabs from './animated-tabs'
 import AutoplayedTabs from './autoplayed-tabs'
 import HeightTabs from './height-tabs'
+import Accordion from './accordion'
 
 export default () => {
   return (
@@ -14,6 +15,7 @@ export default () => {
       <HeightTabs />
       <AnimatedTabs />
       <AutoplayedTabs />
+      <Accordion />
     </>
   )
 }
