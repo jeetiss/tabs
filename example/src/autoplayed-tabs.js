@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Tabs, useTabState, Panel } from 'restart-tabs'
+import { Tabs, useTabState, Panel } from '@bumaga/tabs'
 import { useInterval } from '@restart/hooks'
 import { motion } from 'framer-motion'
 
@@ -56,7 +56,7 @@ export default () => {
         />
 
         <Panel>
-          <h1>Hello World from React 📦 🚀</h1>
+          <h1>Hello World 📦 🚀</h1>
         </Panel>
 
         <Panel>

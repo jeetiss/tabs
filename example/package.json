@@ -11,11 +11,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@bumaga/tabs": "0.1.1",
     "@restart/hooks": "^0.3.8",
     "framer-motion": "^1.2.3",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "restart-tabs": "../"
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

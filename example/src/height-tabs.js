@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, cloneElement } from 'react'
-import { Tabs, useTabState, Panel } from 'restart-tabs'
+import { Tabs, useTabState, Panel } from '@bumaga/tabs'
 import { motion } from 'framer-motion'
 
 const cn = (...args) => args.filter(Boolean).join(' ')

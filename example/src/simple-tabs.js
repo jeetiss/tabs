@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs, useTabState, Panel } from 'restart-tabs'
+import { Tabs, useTabState, Panel } from '@bumaga/tabs'
 
 const cn = (...args) => args.filter(Boolean).join(' ')
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs, useTabState, usePanelState } from 'restart-tabs'
+import { Tabs, useTabState, usePanelState } from '@bumaga/tabs'
 import { motion } from 'framer-motion'
 
 import './accordion.css'
