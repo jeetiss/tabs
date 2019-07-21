@@ -25825,7 +25825,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/use-constant/dist/use-constant.esm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25849,7 +25849,7 @@ function useConstant(fn) {
 
 var _default = useConstant;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/restart-tabs/dist/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@bumaga/tabs/dist/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25941,7 +25941,7 @@ const Panel = ({
 };
 
 exports.Panel = Panel;
-},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/restart-tabs/node_modules/use-constant/dist/use-constant.esm.js"}],"simple-tabs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","use-constant":"../node_modules/use-constant/dist/use-constant.esm.js"}],"simple-tabs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25951,7 +25951,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _restartTabs = require("restart-tabs");
+var _tabs = require("@bumaga/tabs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25966,7 +25966,7 @@ var cn = function cn() {
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
-  var _useTabState = (0, _restartTabs.useTabState)(),
+  var _useTabState = (0, _tabs.useTabState)(),
       isActive = _useTabState.isActive,
       onClick = _useTabState.onClick;
 
@@ -25977,17 +25977,17 @@ var Tab = function Tab(_ref) {
 };
 
 var _default = function _default() {
-  return _react.default.createElement(_restartTabs.Tabs, null, _react.default.createElement("div", {
+  return _react.default.createElement(_tabs.Tabs, null, _react.default.createElement("div", {
     className: "tabs"
   }, _react.default.createElement("div", {
     className: "tab-list"
   }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Tab, null, "Tab 3")), _react.default.createElement("div", {
     className: "tab-progress"
-  }), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state."))));
+  }), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state."))));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@bumaga/tabs":"../node_modules/@bumaga/tabs/dist/index.js"}],"../node_modules/hey-listen/dist/hey-listen.es.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35550,7 +35550,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _restartTabs = require("restart-tabs");
+var _tabs = require("@bumaga/tabs");
 
 var _framerMotion = require("framer-motion");
 
@@ -35575,7 +35575,7 @@ var cn = function cn() {
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
-  var _useTabState = (0, _restartTabs.useTabState)(),
+  var _useTabState = (0, _tabs.useTabState)(),
       isActive = _useTabState.isActive,
       onClick = _useTabState.onClick;
 
@@ -35640,7 +35640,7 @@ var PanelList = function PanelList(_ref2) {
 
 var _default = function _default() {
   var state = (0, _react.useState)(0);
-  return _react.default.createElement(_restartTabs.Tabs, {
+  return _react.default.createElement(_tabs.Tabs, {
     state: state
   }, _react.default.createElement("div", {
     className: "tabs"
@@ -35650,11 +35650,11 @@ var _default = function _default() {
     className: "tab-progress"
   }), _react.default.createElement(PanelList, {
     state: state
-  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "animations with framer/motion")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "is pure")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "\u2764\uFE0F")))));
+  }, _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "animations with framer/motion")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "is pure")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "\u2764\uFE0F")))));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"../node_modules/@restart/hooks/esm/useCallbackRef.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@bumaga/tabs":"../node_modules/@bumaga/tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"../node_modules/@restart/hooks/esm/useCallbackRef.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36402,7 +36402,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _restartTabs = require("restart-tabs");
+var _tabs = require("@bumaga/tabs");
 
 var _hooks = require("@restart/hooks");
 
@@ -36431,7 +36431,7 @@ var cn = function cn() {
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
-  var _useTabState = (0, _restartTabs.useTabState)(),
+  var _useTabState = (0, _tabs.useTabState)(),
       isActive = _useTabState.isActive,
       onClick = _useTabState.onClick;
 
@@ -36474,7 +36474,7 @@ var _default = function _default() {
       return (index + 1) % 3;
     });
   }, duration * 1000, paused);
-  return _react.default.createElement(_restartTabs.Tabs, {
+  return _react.default.createElement(_tabs.Tabs, {
     state: [index, setIndex]
   }, _react.default.createElement("div", {
     className: "tabs",
@@ -36496,11 +36496,11 @@ var _default = function _default() {
       ease: 'linear',
       duration: duration
     }
-  }), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Hello World from React \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8"))));
+  }), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("h1", null, "Hello World \uD83D\uDCE6 \uD83D\uDE80")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("h1", null, "Tabs with hooks \uD83C\uDFA3")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("h1", null, "So nice \uD83D\uDEA8"))));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./useHover":"useHover.js"}],"height-tabs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@bumaga/tabs":"../node_modules/@bumaga/tabs/dist/index.js","@restart/hooks":"../node_modules/@restart/hooks/esm/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./useHover":"useHover.js"}],"height-tabs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36510,7 +36510,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _restartTabs = require("restart-tabs");
+var _tabs = require("@bumaga/tabs");
 
 var _framerMotion = require("framer-motion");
 
@@ -36535,7 +36535,7 @@ var cn = function cn() {
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
-  var _useTabState = (0, _restartTabs.useTabState)(),
+  var _useTabState = (0, _tabs.useTabState)(),
       isActive = _useTabState.isActive,
       onClick = _useTabState.onClick;
 
@@ -36577,7 +36577,7 @@ var PanelList = function PanelList(_ref2) {
 
 var _default = function _default() {
   var state = (0, _react.useState)(0);
-  return _react.default.createElement(_restartTabs.Tabs, {
+  return _react.default.createElement(_tabs.Tabs, {
     state: state
   }, _react.default.createElement("div", {
     className: "tabs"
@@ -36587,11 +36587,11 @@ var _default = function _default() {
     className: "tab-progress"
   }), _react.default.createElement(PanelList, {
     state: state
-  }, _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_restartTabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state.")))));
+  }, _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc.")), _react.default.createElement(_tabs.Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state.")))));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"accordion.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@bumaga/tabs":"../node_modules/@bumaga/tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js"}],"accordion.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -36606,7 +36606,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _restartTabs = require("restart-tabs");
+var _tabs = require("@bumaga/tabs");
 
 var _framerMotion = require("framer-motion");
 
@@ -36625,7 +36625,7 @@ var cn = function cn() {
 var Tab = function Tab(_ref) {
   var children = _ref.children;
 
-  var _useTabState = (0, _restartTabs.useTabState)(),
+  var _useTabState = (0, _tabs.useTabState)(),
       isActive = _useTabState.isActive,
       onClick = _useTabState.onClick;
 
@@ -36646,7 +36646,7 @@ var panel = {
 
 var Panel = function Panel(_ref2) {
   var children = _ref2.children;
-  var isActive = (0, _restartTabs.usePanelState)();
+  var isActive = (0, _tabs.usePanelState)();
   return _react.default.createElement(_framerMotion.motion.div, {
     className: "accordion-panel",
     animate: isActive ? 'visible' : 'hidden',
@@ -36655,13 +36655,13 @@ var Panel = function Panel(_ref2) {
 };
 
 var _default = function _default() {
-  return _react.default.createElement(_restartTabs.Tabs, null, _react.default.createElement("div", {
+  return _react.default.createElement(_tabs.Tabs, null, _react.default.createElement("div", {
     className: "accordion"
   }, _react.default.createElement(Tab, null, "Tab 1"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "Creates a MotionValue that, when set, will use a spring animation to animate to its new state.")), _react.default.createElement(Tab, null, "Tab 2"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "In sociology, anthropology, and linguistics, structuralism is the methodology that implies elements of human culture must be understood by way of their relationship to a broader, overarching system or structure. It works to uncover the structures that underlie all the things that humans do, think, perceive, and feel. Alternatively, as summarized by philosopher Simon Blackburn, structuralism is \"the belief that phenomena of human life are not intelligible except through their interrelations. These relations constitute a structure, and behind local variations in the surface phenomena there are constant laws of abstract structure\".")), _react.default.createElement(Tab, null, "Tab 3"), _react.default.createElement(Panel, null, _react.default.createElement("p", null, "The input range must be a linear series of numbers. The output range can be any value type supported by Framer Motion: numbers, colors, shadows, etc."))));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","restart-tabs":"../node_modules/restart-tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./accordion.css":"accordion.css"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@bumaga/tabs":"../node_modules/@bumaga/tabs/dist/index.js","framer-motion":"../node_modules/framer-motion/dist/framer-motion.es.js","./accordion.css":"accordion.css"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36732,7 +36732,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54092" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64102" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
