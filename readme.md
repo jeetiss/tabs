@@ -56,7 +56,7 @@ const Tab = ({ children }) => {
 const Panel = ({ children }) => {
   const isActive = usePanelState();
 
-  return isActive ? <p>children</p> : null;
+  return isActive ? <p>{children}</p> : null;
 };
 
 export default () => (
