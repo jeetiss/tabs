@@ -1,6 +1,7 @@
 {
   "name": "@bumaga/tabs",
   "version": "0.1.1",
+  "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
     "dist"
