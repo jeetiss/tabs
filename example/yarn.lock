@@ -753,10 +753,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bumaga/tabs@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@bumaga/tabs/-/tabs-0.1.1.tgz#7a1151d5d62f128e5d23404afe474049836d243f"
-  integrity sha512-5vrby7+ZLZRGg5WvWwlMqK4L8FEWTc5Iacwv9dAU9XVRZQzzELo3X7FIKsyVqeTAQP7LhoElc6ziFLAtbzBrqw==
+"@bumaga/tabs@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@bumaga/tabs/-/tabs-0.1.2.tgz#59d3bf55bf6a0e07194e38be9cc76fa0f8e25499"
+  integrity sha512-VokF/aVUprCxO8H2BZdH/XI6lJdQSJJqomOY/1B8aQ2LEw26aAcds1Ahu7UNl14vjzvu61nueWSelwk+h57qqQ==
   dependencies:
     use-constant "^1.0.0"
 
