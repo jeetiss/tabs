@@ -7,16 +7,14 @@ git:
 
 jobs:
   include:
-    - stage: tests
-      name: "unit Tests"
+    - stage: test
       script: npm test
-    - stage: release
-      name: "release it"
-      script:
-        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-        - npm run release
 
 stages:
-  - tests
-  - name: release
+  - name: deploy
     if: branch = master
+
+deploy:
+  script:
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    - npm run release
