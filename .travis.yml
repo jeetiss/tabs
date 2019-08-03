@@ -5,17 +5,17 @@ node_js:
 git:
   depth: 5
 
-script:
-  - npm run build
-  - npm test
-  - npm run size
+jobs:
+  include:
+    - stage: build
+      script:
+        - npm run build
+        - npm test
+        - npm run size
+    - stage: release
+      script: echo "HELO FROM RELEASE"
 
 stages:
-  - name: deploy
+  - build
+  - name: release
     if: branch = master AND commit_message !~ /(no-release)/
-
-deploy:
-  skip_cleanup: true
-  script:
-    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-    - npm run release
