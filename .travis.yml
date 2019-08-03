@@ -5,17 +5,22 @@ node_js:
 git:
   depth: 5
 
-script:
-  - npm run build
-  - npm test
-  - npm run size
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run build
+        - npm test
+        - npm run size
+    - stage: release
+      script:
+        - npm run build
+        - npm run release -- --ci
 
 stages:
-  - name: deploy
-    if: branch = master AND commit_message !~ /(no-release)/
-
-deploy:
-  skip_cleanup: true
-  script:
-    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-    - npm run release
+  - test
+  - name: release
+    if: |
+      branch = master AND \
+      type = push AND \
+      commit_message !~ /(no-release)/
