@@ -5,3 +5,5 @@ dist
 .DS_Store
 yarn.lock
 coverage
+
+.npmrc
