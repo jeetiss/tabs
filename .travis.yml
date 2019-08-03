@@ -7,20 +7,18 @@ git:
 
 jobs:
   include:
-    - stage: build
-      name: "Build and test"
+    - stage: test
       script:
         - npm run build
         - npm test
         - npm run size
     - stage: release
-      name: "Release it"
       script:
         - npm run build
         - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - npm run release -- --ci
 
 stages:
-  - build
+  - test
   - name: release
     if: branch = master AND commit_message !~ /(no-release)/
