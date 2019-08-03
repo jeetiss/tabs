@@ -8,14 +8,19 @@ git:
 jobs:
   include:
     - stage: build
+      name: "Build and test"
       script:
         - npm run build
         - npm test
         - npm run size
     - stage: release
-      script: echo "HELO FROM RELEASE"
+      name: "Release it"
+      script:
+        - npm run build
+        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+        - npm run release -- --ci
 
 stages:
   - build
   - name: release
-    if: branch = travis AND commit_message !~ /(no-release)/
+    if: branch = master AND commit_message !~ /(no-release)/
