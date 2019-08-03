@@ -4,7 +4,19 @@ node_js:
   - node
 git:
   depth: 5
+
 jobs:
   include:
-    - stage: run unit tests
+    - stage: tests
+      name: "unit Tests"
       script: npm test
+    - stage: release
+      name: "release it"
+      script:
+        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+        - npm run release
+
+stages:
+  - tests
+  - name: release
+    if: branch = master
