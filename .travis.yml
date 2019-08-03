@@ -4,7 +4,23 @@ node_js:
   - node
 git:
   depth: 5
+
 jobs:
   include:
-    - stage: run unit tests
-      script: npm test
+    - stage: test
+      script:
+        - npm run build
+        - npm test
+        - npm run size
+    - stage: release
+      script:
+        - npm run build
+        - npm run release -- --ci
+
+stages:
+  - test
+  - name: release
+    if: |
+      branch = master AND \
+      type = push AND \
+      commit_message !~ /(no-release)/
