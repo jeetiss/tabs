@@ -15,6 +15,7 @@ stages:
     if: branch = master
 
 deploy:
+  skip_cleanup: true
   script:
     - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
     - npm run release
