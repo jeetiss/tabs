@@ -18,4 +18,4 @@ jobs:
 stages:
   - build
   - name: release
-    if: branch = master AND commit_message !~ /(no-release)/
+    if: branch = travis AND commit_message !~ /(no-release)/
