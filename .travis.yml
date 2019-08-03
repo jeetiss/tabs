@@ -6,6 +6,7 @@ git:
   depth: 5
 
 script:
+  - npm run build
   - npm test
   - npm run size
 

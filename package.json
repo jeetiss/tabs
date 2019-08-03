@@ -10,9 +10,8 @@
   "scripts": {
     "build": "babel src -d dist",
     "size": "size-limit",
-    "prepublishOnly": "yarn build",
     "test": "NODE_ENV=test jest --verbose --coverage",
-    "release": "npm run build && release-it"
+    "release": "release-it"
   },
   "dependencies": {
     "use-constant": "^1.0.0"
