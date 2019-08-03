@@ -21,4 +21,6 @@ jobs:
 stages:
   - test
   - name: release
-    if: branch = master AND commit_message !~ /(no-release)/
+    if: branch = master AND \
+        type = push AND \
+        commit_message !~ /(no-release)/
