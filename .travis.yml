@@ -12,7 +12,8 @@ script:
 
 stages:
   - name: deploy
-    if: branch = master
+  if: commit_message !~ /(no-release)/
+    # if: branch = master
 
 deploy:
   skip_cleanup: true
