@@ -49,8 +49,6 @@
       "limit": "400 B"
     }
   ],
-  "author": "Ivakhnenko Dmitry <jeetiss@ya.ru>",
-  "license": "ISC",
   "release-it": {
     "github": {
       "release": true
@@ -64,5 +62,7 @@
         "infile": "changelog.md"
       }
     }
-  }
+  },
+  "author": "Ivakhnenko Dmitry <jeetiss@ya.ru>",
+  "license": "ISC"
 }
