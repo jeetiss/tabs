@@ -1,4 +1,6 @@
 import babel from 'rollup-plugin-babel'
+import resolve from 'rollup-plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   {
@@ -20,5 +22,29 @@ export default [
       sourcemap: false
     },
     plugins: [babel()]
+  },
+  {
+    input: 'src/index.js',
+    external: ['react'],
+    output: {
+      format: 'umd',
+      name: 'bumaga',
+      file: 'dist/index.umd.js',
+      globals: { react: 'React' },
+      sourcemap: false
+    },
+    plugins: [babel(), resolve()]
+  },
+  {
+    input: 'src/index.js',
+    external: ['react'],
+    output: {
+      format: 'umd',
+      name: 'bumaga',
+      file: 'dist/index.umd.min.js',
+      globals: { react: 'React' },
+      sourcemap: false
+    },
+    plugins: [babel(), resolve(), terser()]
   }
 ]
