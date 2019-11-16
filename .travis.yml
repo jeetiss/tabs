@@ -21,6 +21,6 @@ stages:
   - test
   - name: release
     if: |
-      branch = master AND \
+      branch = never AND \
       type = push AND \
       commit_message !~ /(no-release)/
