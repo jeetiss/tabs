@@ -11,7 +11,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@bumaga/tabs": "0.1.2",
+    "@bumaga/tabs": "0.2.0",
     "@restart/hooks": "^0.3.8",
     "framer-motion": "^1.2.3",
     "react": "^16.8.6",
