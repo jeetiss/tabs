@@ -27,7 +27,7 @@
     "@babel/preset-react": "7.7.0",
     "@release-it/conventional-changelog": "1.1.0",
     "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "8.0.9",
+    "@testing-library/react": "9.3.2",
     "eslint": "6.6.0",
     "eslint-config-standard": "14.1.0",
     "eslint-config-standard-jsx": "8.1.0",
