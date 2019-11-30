@@ -42,7 +42,7 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "release-it": "12.4.3",
-    "rollup": "1.27.5",
+    "rollup": "1.27.6",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
