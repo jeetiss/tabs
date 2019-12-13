@@ -28,7 +28,7 @@
     "@release-it/conventional-changelog": "1.1.0",
     "@size-limit/preset-small-lib": "2.2.2",
     "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.3.3",
+    "@testing-library/react": "9.4.0",
     "eslint": "6.7.2",
     "eslint-config-standard": "14.1.0",
     "eslint-config-standard-jsx": "8.1.0",
