@@ -11,7 +11,8 @@
     "build": "rollup -c",
     "size": "size-limit",
     "test": "NODE_ENV=test jest --verbose --coverage",
-    "release": "release-it"
+    "release:prepare": "shipjs prepare",
+    "release:trigger": "shipjs trigger"
   },
   "dependencies": {
     "use-constant": "^1.0.0"
@@ -25,7 +26,6 @@
     "@babel/core": "7.8.7",
     "@babel/preset-env": "7.8.7",
     "@babel/preset-react": "7.8.3",
-    "@release-it/conventional-changelog": "1.1.0",
     "@size-limit/preset-small-lib": "3.0.1",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.5.0",
@@ -41,12 +41,12 @@
     "jest": "25.1.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
-    "release-it": "12.6.3",
     "rollup": "1.32.0",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-terser": "5.2.0"
+    "rollup-plugin-terser": "5.2.0",
+    "shipjs": "0.16.0"
   },
   "size-limit": [
     {
@@ -54,20 +54,6 @@
       "limit": "400 B"
     }
   ],
-  "release-it": {
-    "github": {
-      "release": true
-    },
-    "git": {
-      "commitMessage": "chore: release ${version}"
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "changelog.md"
-      }
-    }
-  },
   "author": "Ivakhnenko Dmitry <jeetiss@ya.ru>",
   "license": "ISC"
 }
