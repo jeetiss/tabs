@@ -26,6 +26,7 @@
     "@babel/core": "7.8.7",
     "@babel/preset-env": "7.8.7",
     "@babel/preset-react": "7.8.3",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "@size-limit/preset-small-lib": "4.3.1",
     "@testing-library/jest-dom": "5.1.1",
     "@testing-library/react": "9.5.0",
@@ -43,8 +44,6 @@
     "react-dom": "16.13.0",
     "rollup": "2.0.3",
     "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-commonjs": "10.1.0",
-    "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.2.0",
     "shipjs": "0.17.0",
     "size-limit": "4.3.1"
