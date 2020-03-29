@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
-    "@babel/preset-react": "7.9.1",
+    "@babel/preset-react": "7.9.4",
     "gh-pages": "2.2.0",
     "parcel-bundler": "1.12.4"
   }
