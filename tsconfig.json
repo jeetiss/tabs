@@ -1,5 +1,6 @@
 {
   "include": ["src", "types", "test"],
+  "exclude": ["test"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
@@ -7,6 +8,7 @@
     "declaration": true,
     "sourceMap": true,
     "rootDir": "./src",
+    "outDir": "./dist",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
