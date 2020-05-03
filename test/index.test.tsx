@@ -9,7 +9,7 @@ import { Panel, Tab, Tabs } from "../src";
 const Button: React.FC<{ isActive?: boolean; onClick?: () => void }> = ({
   isActive,
   onClick,
-  children
+  children,
 }) => (
   <button disabled={isActive} onClick={onClick}>
     {children}
@@ -27,19 +27,39 @@ const Testing = () => (
       </Tab>
     </div>
 
-    <Panel>content 1</Panel>
+    <Panel data-testid="panel-1">content 1</Panel>
     <Panel>content 2</Panel>
   </Tabs>
 );
 
-test("renders and change tabs", () => {
-  const { container, queryByText } = render(<Testing />);
+describe("Tabs", () => {
+  test("should render correctly", () => {
+    const { asFragment } = render(<Testing />);
 
-  expect(container).toHaveTextContent("content 1");
-  expect(container).not.toHaveTextContent("content 2");
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-  fireEvent.click(queryByText("tab 2")!);
+  test("should display same panel on clicking same tab", () => {
+    const { container, queryByText } = render(<Testing />);
 
-  expect(container).not.toHaveTextContent("content 1");
-  expect(container).toHaveTextContent("content 2");
+    expect(container).toHaveTextContent("content 1");
+    expect(container).not.toHaveTextContent("content 2");
+
+    fireEvent.click(queryByText("tab 1")!);
+
+    expect(container).toHaveTextContent("content 1");
+    expect(container).not.toHaveTextContent("content 2");
+  });
+
+  test("should display correct tab on change", () => {
+    const { container, queryByText } = render(<Testing />);
+
+    expect(container).toHaveTextContent("content 1");
+    expect(container).not.toHaveTextContent("content 2");
+
+    fireEvent.click(queryByText("tab 2")!);
+
+    expect(container).not.toHaveTextContent("content 1");
+    expect(container).toHaveTextContent("content 2");
+  });
 });
