@@ -11,7 +11,7 @@
     "build": "tsdx build",
     "size": "size-limit",
     "lint": "tsdx lint",
-    "test": "tsdx test --coverage --updateSnapshot",
+    "test": "tsdx test --coverage",
     "release:prepare": "shipjs prepare",
     "release:trigger": "shipjs trigger"
   },

@@ -33,12 +33,6 @@ const Testing = () => (
 );
 
 describe("Tabs", () => {
-  test("should render correctly", () => {
-    const { asFragment } = render(<Testing />);
-
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   test("should display same panel on clicking same tab", () => {
     const { container, queryByText } = render(<Testing />);
 
