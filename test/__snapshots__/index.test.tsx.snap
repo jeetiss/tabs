@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tab should render correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <button
+      disabled=""
+    >
+      tab 1
+    </button>
+    <button>
+      tab 2
+    </button>
+  </div>
+  content 1
+</DocumentFragment>
+`;
