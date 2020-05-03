@@ -10,8 +10,8 @@
   "scripts": {
     "build": "tsdx build",
     "size": "size-limit",
-    "lint": " tsdx lint",
-    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "test": "tsdx test --coverage",
     "release:prepare": "shipjs prepare",
     "release:trigger": "shipjs trigger"
   },
