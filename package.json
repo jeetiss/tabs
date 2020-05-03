@@ -35,7 +35,7 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "400 B"
+      "limit": "420 B"
     }
   ],
   "author": "Ivakhnenko Dmitry <jeetiss@ya.ru>",
