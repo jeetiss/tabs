@@ -13,7 +13,7 @@
   "dependencies": {
     "@bumaga/tabs": "0.2.0",
     "@restart/hooks": "^0.3.8",
-    "framer-motion": "^1.2.3",
+    "framer-motion": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
