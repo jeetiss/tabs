@@ -24,6 +24,11 @@ export const Tabs = ({ state: outerState, children }) => {
   )
 }
 
+export const useUnsafeTabState = () => {
+  const [activeIndex, setActive] = useContext(TabsState)
+  return { activeIndex, setActive }
+}
+
 export const useTabState = () => {
   const [activeIndex, setActive] = useContext(TabsState)
   const elements = useContext(Elements)
