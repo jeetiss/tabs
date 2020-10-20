@@ -36,7 +36,7 @@ export default () => (
 
     <Panel><p>Panel 1</p></Panel>
     <Panel><p>Panel 2</p></Panel>
-    <Panel><p>panel 3</p></Panel>
+    <Panel><p>Panel 3</p></Panel>
   </Tabs>
 );
 ```
