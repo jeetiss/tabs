@@ -26,7 +26,7 @@
     "@babel/core": "7.12.3",
     "@babel/preset-env": "7.12.1",
     "@babel/preset-react": "7.12.1",
-    "@rollup/plugin-node-resolve": "7.1.3",
+    "@rollup/plugin-node-resolve": "9.0.0",
     "@size-limit/preset-small-lib": "4.6.2",
     "@testing-library/jest-dom": "5.11.5",
     "@testing-library/react": "9.5.0",
