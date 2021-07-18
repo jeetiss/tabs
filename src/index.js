@@ -63,13 +63,13 @@ export const usePanelState = () => {
 }
 
 export const Tab = ({ children }) => {
-  const state = useTabState()
+  const { isActive, onClick } = useTabState()
 
   if (typeof children === 'function') {
-    return children(state)
+    return children({ isActive, onClick })
   }
 
-  return isValidElement(children) ? cloneElement(children, state) : children
+  return isValidElement(children) ? cloneElement(children, { onClick }) : children
 }
 
 export const Panel = ({ active, children }) => {
