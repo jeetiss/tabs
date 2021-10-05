@@ -48,13 +48,13 @@ import React from "react";
 import { Tabs, useTabState, usePanelState } from "@bumaga/tabs";
 
 const Tab = ({ children }) => {
-  const { onClick } = useTabState();
+  const { onClick } = useTabState(children);
 
   return <button onClick={onClick}>{children}</button>;
 };
 
 const Panel = ({ children }) => {
-  const isActive = usePanelState();
+  const isActive = usePanelState(children);
 
   return isActive ? <p>{children}</p> : null;
 };
