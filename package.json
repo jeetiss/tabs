@@ -32,7 +32,7 @@
     "@testing-library/react": "9.5.0",
     "eslint": "6.8.0",
     "eslint-config-standard": "14.1.1",
-    "eslint-config-standard-jsx": "8.1.0",
+    "eslint-config-standard-jsx": "11.0.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.3.1",
