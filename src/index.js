@@ -14,7 +14,7 @@ const Elements = createContext()
 
 export const Tabs = ({ state: outerState, children }) => {
   const innerState = useState(0)
-  const elements = useConstant(() => ({ tabs: 0, panels: 0 }))
+  const elements = useConstant(() => ({ tabs: [], panels: [] }))
   const state = outerState || innerState
 
   return (
@@ -24,15 +24,20 @@ export const Tabs = ({ state: outerState, children }) => {
   )
 }
 
-export const useTabState = () => {
+export const useTabState = (children) => {
   const [activeIndex, setActive] = useContext(TabsState)
   const elements = useContext(Elements)
 
   const tabIndex = useConstant(() => {
-    const currentIndex = elements.tabs
-    elements.tabs += 1
+    const currentIndex = elements.tabs.length
+    const childrenIndex = elements.tabs.indexOf(children)
 
-    return currentIndex
+    const isChildrenUnique = !elements.tabs.includes(children)
+    if (isChildrenUnique) {
+      elements.tabs.push(children)
+    }
+
+    return isChildrenUnique ? currentIndex : childrenIndex
   })
 
   const onClick = useConstant(() => () => setActive(tabIndex))
@@ -48,22 +53,27 @@ export const useTabState = () => {
   return state
 }
 
-export const usePanelState = () => {
+export const usePanelState = (children) => {
   const [activeIndex] = useContext(TabsState)
   const elements = useContext(Elements)
 
   const panelIndex = useConstant(() => {
-    const currentIndex = elements.panels
-    elements.panels += 1
+    const currentIndex = elements.panels.length
+    const childrenIndex = elements.panels.indexOf(children)
 
-    return currentIndex
+    const isChildrenUnique = !elements.panels.includes(children)
+    if (isChildrenUnique) {
+      elements.panels.push(children)
+    }
+
+    return isChildrenUnique ? currentIndex : childrenIndex
   })
 
   return panelIndex === activeIndex
 }
 
 export const Tab = ({ children }) => {
-  const state = useTabState()
+  const state = useTabState(children)
 
   if (typeof children === 'function') {
     return children(state)
@@ -73,7 +83,7 @@ export const Tab = ({ children }) => {
 }
 
 export const Panel = ({ active, children }) => {
-  const isActive = usePanelState()
+  const isActive = usePanelState(children)
 
   return isActive || active ? children : null
 }

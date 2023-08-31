@@ -39,3 +39,19 @@ test('renders and change tabs', () => {
   expect(container).not.toHaveTextContent('content 1')
   expect(container).toHaveTextContent('content 2')
 })
+
+test('renders and change tabs when using React.StrictMode', () => {
+  const { container, queryByText } = render(
+    <React.StrictMode>
+      <Testing />
+    </React.StrictMode>
+  )
+
+  expect(container).toHaveTextContent('content 1')
+  expect(container).not.toHaveTextContent('content 2')
+
+  fireEvent.click(queryByText('tab 2'))
+
+  expect(container).not.toHaveTextContent('content 1')
+  expect(container).toHaveTextContent('content 2')
+})
