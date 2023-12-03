@@ -43,7 +43,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "rollup": "2.79.1",
-    "rollup-plugin-babel": "4.4.0",
+    "@rollup/plugin-babel": "5.0.0",
     "rollup-plugin-terser": "5.3.1",
     "shipjs": "0.26.3",
     "size-limit": "4.12.0"
