@@ -14,8 +14,8 @@
     "@bumaga/tabs": "0.2.0",
     "@restart/hooks": "^0.4.0",
     "framer-motion": "^1.2.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.22.5",
