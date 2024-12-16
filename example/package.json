@@ -18,8 +18,8 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "@babel/core": "7.22.5",
-    "@babel/preset-react": "7.22.5",
+    "@babel/core": "7.26.0",
+    "@babel/preset-react": "7.26.3",
     "gh-pages": "2.2.0",
     "parcel-bundler": "1.12.5"
   }
