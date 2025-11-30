@@ -1187,10 +1187,10 @@
     hey-listen "^1.0.8"
     style-value-types "^3.1.5"
 
-"@restart/hooks@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.5.0.tgz#a594af7c3b64f5e65a7aca011551b0cdd93ec14e"
-  integrity sha512-wS+h6IusJCPjTkmOOrRZxIPICD/mtFA3PRZviutoM23/b7akyDGfZF/WS+nIFk27u7JDhPE2+0GBdZxjSqHZkg==
+"@restart/hooks@^0.6.0":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.6.2.tgz#55a1f9b9bb413aaf2cbb00b0ff337f807082b72e"
+  integrity sha512-0QzYBe1raty/ULcuyTk0ZdLf+e//4n/f39hDPt5JYZW5kSbHEAgnZhLpWErCKEYSzi14oVBSbNsllnJmWlloBg==
   dependencies:
     dequal "^2.0.3"
 
